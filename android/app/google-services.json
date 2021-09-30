@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "234428590116",
+    "project_id": "revo---audio-recorder",
+    "storage_bucket": "revo---audio-recorder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234428590116:android:059af6357a7d942f65d0b1",
+        "android_client_info": {
+          "package_name": "com.revo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234428590116-1r11h1ss57hbeljq59l0rdtku8sigv64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJqNlbjUJOFtpEuejFCALcH07rzZFu3vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234428590116-1r11h1ss57hbeljq59l0rdtku8sigv64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234428590116:android:35649471cfcaa6cc65d0b1",
+        "android_client_info": {
+          "package_name": "com.revovoicerecorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234428590116-1r11h1ss57hbeljq59l0rdtku8sigv64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJqNlbjUJOFtpEuejFCALcH07rzZFu3vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234428590116-1r11h1ss57hbeljq59l0rdtku8sigv64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-2389587819116305~6503363826"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234428590116:android:babe08098a76462865d0b1",
+        "android_client_info": {
+          "package_name": "com.voicerecorder.revo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234428590116-1r11h1ss57hbeljq59l0rdtku8sigv64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJqNlbjUJOFtpEuejFCALcH07rzZFu3vM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234428590116-1r11h1ss57hbeljq59l0rdtku8sigv64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-2389587819116305~7120567928"
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "voiceRecorder",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "releaseAndRun":"cd android && ./gradlew clean && ./gradlew bundleRelease && cd .. &&  npx react-native run-android --variant=release",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/masked-view": "^0.1.7",
+    "@react-native-community/slider": "^3.0.3",
+    "@react-native-firebase/admob": "^10.4.1",
+    "@react-native-firebase/app": "^10.4.0",
+    "@react-navigation/bottom-tabs": "^5.1.1",
+    "@react-navigation/native": "^5.0.9",
+    "@react-navigation/stack": "^5.1.1",
+    "fbjs": "^3.0.0",
+    "i18n-js": "^3.8.0",
+    "react": "16.13.1",
+    "react-native": "^0.64.2",
+    "react-native-audio-recorder-player": "^3.1.2",
+    "react-native-fs": "^2.18.0",
+    "react-native-gesture-handler": "^1.6.0",
+    "react-native-localize": "^2.0.1",
+    "react-native-paper": "^3.10.1",
+    "react-native-permissions": "^2.0.10",
+    "react-native-reanimated": "^1.7.0",
+    "react-native-rename": "^2.9.0",
+    "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "^2.3.0",
+    "react-native-track-player": "^1.2.3",
+    "react-native-vector-icons": "^6.6.0",
+    "react-redux": "^7.2.0",
+    "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/runtime": "^7.8.7",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "babel-jest": "^25.1.0",
+    "eslint": "^6.8.0",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "16.13.1",
+    "redux-logger": "^3.0.6"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
