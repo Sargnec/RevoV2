@@ -2,14 +2,14 @@ import React from 'react'
 import { View, Text, FlatList, StyleSheet, Animated } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteVoice, changeName } from "../redux/sendVoice";
-import { addRecord } from '../redux/listActions';
+import { addRecord, updateList } from '../redux/listActions';
 import RevoHeader from "../components/header";
 import RevoSearchBar from "../components/searchBar";
 import Track from "../components/Track";
 import BottomSheet from 'reanimated-bottom-sheet';
 import { Button, IconButton, Divider, Menu, Checkbox } from 'react-native-paper';
 import Icon from "react-native-vector-icons/dist/MaterialCommunityIcons";
-import * as RNFS from 'react-native-fs';
+import ReactNativeBlobUtil from 'react-native-blob-util'
 import { useTheme } from '@react-navigation/native';
 import I18n from '../lang/_i18n';
 import RecordPlayer from '../components/RecordPlayer';
@@ -46,6 +46,7 @@ const AudioPlayingScreen = () => {
     const voiceDeleter = result => dispatch(deleteVoice(result))
     const nameChanger = result => dispatch(changeName(result))
     const addRecordDispatcher = (result) => dispatch(addRecord(result));
+    const updateListDispatcher = (result) => dispatch(updateList(result));
     const [sendedVoices, setSendedVoices] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const [started, setStarted] = React.useState(false);
@@ -121,18 +122,28 @@ const AudioPlayingScreen = () => {
     const onDelete = (index) => {
         setMenuVisible(false)
         let newArray = [...sendedVoices]
-        let newData = newArray.filter((voice, vIndex) => vIndex !== index)
-        setSendedVoices(newData)
         // create a path you want to delete
         var path = newArray[index].url;
-        RNFS.unlink(path)
+        console.log("path", path);
+        /* Deleting from device folder */
+        ReactNativeBlobUtil.fs.unlink(path)
             .then(() => {
-                voiceDeleter(index)
+                voiceDeleter(index);
             })
-            // `unlink` will throw an error, if the item to unlink does not exist
-            .catch((err) => {
-                console.log(err.message);
-            });
+            .catch((err) => { console.log(err.message); })
+        /* Check if this deleted record is in also groups and delete it */
+        let newData = [...groupList]
+        newData.map((item, listIndex) => {
+            if (item.records.map(record => record.id).find(id => id == newArray[index].id)) {
+                let deletedID = item.records.map(record => record.id).find(id => id == newArray[index].id)
+                let copyOfGroupList = newData[listIndex].records.filter((voice, vIndex) => voice.id !== deletedID)
+                newData[listIndex].records = copyOfGroupList;
+            }
+        })
+        updateListDispatcher(newData)
+        /* Deleting from records tab */
+        let copyOfSendedVoices = newArray.filter((voice, vIndex) => vIndex !== index)
+        setSendedVoices(copyOfSendedVoices)
     }
 
     const openMenu = (index) => { setMenuVisible(true); setCurrentIndex(index) };

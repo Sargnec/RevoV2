@@ -1,12 +1,13 @@
 {
-  "name": "voiceRecorder",
+  "name": "Revo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "releaseAndRun":"cd android && ./gradlew clean && ./gradlew bundleRelease && cd .. &&  npx react-native run-android --variant=release",
+    "releaserun": "cd android && ./gradlew clean && ./gradlew bundleRelease && cd .. &&  npx react-native run-android --variant=release",
+    "cleanrun": "cd android && ./gradlew clean && cd .. && npx react-native run-android",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -24,7 +25,7 @@
     "react": "16.13.1",
     "react-native": "^0.64.2",
     "react-native-audio-recorder-player": "^3.1.2",
-    "react-native-fs": "^2.18.0",
+    "react-native-blob-util": "^0.13.16",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-localize": "^2.0.1",
     "react-native-paper": "^3.10.1",
@@ -38,7 +39,9 @@
     "react-redux": "^7.2.0",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "redux": "^4.0.5",
-    "redux-persist": "^6.0.0"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",

@@ -3,7 +3,7 @@
  */
 export const ADD_LIST = 'ADD_LIST'
 export const ADD_RECORD = 'ADD_RECORD'
-export const CHANGE_LIST_NAME = 'CHANGE_LIST_NAME'
+export const UPDATE_LIST = 'UPDATE_LIST'
 export const DELETE_LIST = 'DELETE_LIST'
 
 /*
@@ -21,9 +21,9 @@ export function addRecord(data) {
     data
   }
 }
-export function changeListName(data) {
+export function updateList(data) {
   return {
-    type: CHANGE_LIST_NAME,
+    type: UPDATE_LIST,
     data
   }
 }

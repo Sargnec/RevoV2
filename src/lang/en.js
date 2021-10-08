@@ -30,7 +30,7 @@ const en = {
     create: "Create",
     GLSAlert: "New list added!",
     emptyLSSubtitle: "Add records to this list",
-    fromList: "From this list",
+    fromList: "From thıs lıst",
     completely: "Completely",
     changeLanguage: "Change language",
     darkMode: "Dark Mode",

@@ -1,4 +1,4 @@
-import { ADD_LIST,ADD_RECORD, CHANGE_LIST_NAME, DELETE_LIST } from "../redux/listActions.js"
+import { ADD_LIST,ADD_RECORD, UPDATE_LIST, DELETE_LIST } from "../redux/listActions.js"
 
 const initialState = []
 
@@ -8,7 +8,7 @@ const listRedux = (state = initialState, action) => {
             return { ...state, groupLists: action.data };
         case ADD_RECORD:
             return { ...state, groupLists: action.data };
-        case CHANGE_LIST_NAME:
+        case UPDATE_LIST:
             return { ...state, groupLists: action.data };
         case DELETE_LIST:
             let arrayC = [...state.groupLists]

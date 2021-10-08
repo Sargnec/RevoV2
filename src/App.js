@@ -1,6 +1,5 @@
 import 'react-native-gesture-handler';
 import * as React from 'react';
-import { useColorScheme } from "react-native"
 import { NavigationContainer, DarkTheme as NavDark, DefaultTheme as NavDefault } from '@react-navigation/native';
 import { Provider as PaperProvider, DefaultTheme as PaperDefault, DarkTheme as PaperDark, Colors } from 'react-native-paper';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -13,13 +12,12 @@ import Settings from './screens/Settings';
 import ListScreen from './screens/ListScreen';
 import { LogBox } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeTheme } from "./redux/settingsActions";
 import I18n from './lang/_i18n';
-// Ignore log notification by message:
+/* // Ignore log notification by message:
 LogBox.ignoreLogs(['Warning: ...']);
 
 // Ignore all log notifications:
-LogBox.ignoreAllLogs();
+LogBox.ignoreAllLogs(); */
 
 const GroupListStack = createStackNavigator();
 
@@ -35,18 +33,6 @@ function GroupListStackScreen() {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-
-  const colorScheme = useColorScheme() == "light" ? "false" : "true";
-  const dispatch = useDispatch()
-  const themeChanger = result => dispatch(changeTheme(result))
-
- React.useEffect(() => {
-    if (colorScheme == "light") {
-      themeChanger(false)
-    } else {
-      themeChanger(true)
-    }
-  }, [colorScheme])
 
   const CustomDefault = {
     ...NavDefault,

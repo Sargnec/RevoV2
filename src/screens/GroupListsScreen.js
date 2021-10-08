@@ -26,7 +26,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
     addList,
     addRecord,
-    changeListName,
+    updateList,
     deleteList,
 } from '../redux/listActions';
 import { useTheme } from '@react-navigation/native';
@@ -53,7 +53,7 @@ const GroupListsScreen = ({ navigation }) => {
     const dispatch = useDispatch();
     const addListDispatcher = (result) => dispatch(addList(result));
     const addRecordDispatcher = (result) => dispatch(addRecord(result));
-    const changeNameDispatcher = (result) => dispatch(changeListName(result));
+    const changeNameDispatcher = (result) => dispatch(updateList(result));
     const deleteListDispatcher = (result) => dispatch(deleteList(result));
     const [lists, setLists] = React.useState([]);
     const [text, setText] = React.useState('');
@@ -144,7 +144,6 @@ const GroupListsScreen = ({ navigation }) => {
             setVisible(false);
             setText('');
             setClicked(false);
-            setSnackbarVisible(true);
         }
     };
     const onDeleteList = () => {

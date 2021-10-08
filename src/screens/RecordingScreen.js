@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, PermissionsAndroid, Animated } from 'react-native';
+import { View, Text, StyleSheet, PermissionsAndroid, Animated, Platform } from 'react-native';
 import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import AudioRecorderPlayer from 'react-native-audio-recorder-player';
 import { Button, Colors, Title } from 'react-native-paper';
@@ -8,6 +8,7 @@ import { sendVoice } from "../redux/sendVoice";
 import { useTheme } from '@react-navigation/native';
 import I18n from '../lang/_i18n';
 import { InterstitialAd, AdEventType, TestIds } from '@react-native-firebase/admob';
+import ReactNativeBlobUtil from 'react-native-blob-util'
 import ADMOB_ID from '../../admobId';
 
 const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : ADMOB_ID;
@@ -15,7 +16,7 @@ const audioRecorderPlayer = new AudioRecorderPlayer();
 
 const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
     requestNonPersonalizedAdsOnly: true,
-    keywords: ['fashion', 'clothing'],
+    keywords: [],
 });
 
 const RecordingScreen = () => {
@@ -67,7 +68,14 @@ const RecordingScreen = () => {
     const onStartRecord = async () => {
         var d = new Date();
         let date = d.getFullYear().toString().slice(-2) + d.getMonth().toString() + d.getDate().toString() + d.getHours().toString() + d.getMinutes().toString() + d.getSeconds().toString() + d.getMilliseconds().toString();
-        const result = await audioRecorderPlayer.startRecorder(`sdcard/${date}.mp4`);
+        const dirs = ReactNativeBlobUtil.fs.dirs;
+        const path = Platform.select({
+            ios: `${date}.m4a`,
+            android: `${dirs.CacheDir + "/" + date}.mp3`,
+        });
+
+        const result = await audioRecorderPlayer.startRecorder(path);
+        console.log("result",result);
         audioRecorderPlayer.addRecordBackListener((e) => {
             setRecordSec(e.currentPosition)
             setRecordTime(audioRecorderPlayer.mmssss(Math.floor(e.currentPosition)))

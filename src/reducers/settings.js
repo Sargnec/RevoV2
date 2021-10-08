@@ -1,6 +1,9 @@
 import { CHANGE_THEME ,CHANGE_LANG} from "../redux/settingsActions"
 
-const initialState = []
+const initialState = {
+    isDarkModeOn: false,
+    lang:"en"
+}
 
 const settingsReducer = (state = initialState, action) => {
     switch (action.type) {

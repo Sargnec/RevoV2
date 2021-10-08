@@ -8,9 +8,9 @@ import RevoSearchBar from "../components/searchBar";
 import Track from "../components/Track";
 import { IconButton, Divider, Menu } from 'react-native-paper';
 import Icon from "react-native-vector-icons/dist/MaterialCommunityIcons";
-import { changeListName } from '../redux/listActions';
+import { updateList } from '../redux/listActions';
 import I18n from '../lang/_i18n'
-import * as RNFS from 'react-native-fs';
+import ReactNativeBlobUtil from 'react-native-blob-util'
 import RecordPlayer from '../components/RecordPlayer';
 import NameChangerModal from '../components/NameChangerModal';
 
@@ -36,7 +36,7 @@ const ListScreen = ({ route, navigation }) => {
     const dispatch = useDispatch()
     const voiceDeleter = result => dispatch(deleteVoice(result))
     const nameChanger = result => dispatch(changeName(result))
-    const changeNameDispatcher = (result) => dispatch(changeListName(result));
+    const updateListDispatcher = (result) => dispatch(updateList(result));
     const [menuVisible, setMenuVisible] = React.useState(false);
     const [modalVisible, setModalVisible] = React.useState(false);
     const [currentIndex, setCurrentIndex] = React.useState(0)
@@ -49,13 +49,9 @@ const ListScreen = ({ route, navigation }) => {
 
     React.useEffect(() => {
         let newData = [...groupList[listIndex].records]
-        console.log("newData",newData);
         setListRecords(newData)
-        console.log("newdata listrecord",listRecords);
     }, [groupList[listIndex].records])
-    React.useEffect(() => {
-        console.log("listrecords neden boş",listRecords);
-    }, [])
+    
     React.useEffect(() => {
         let newArray = [...groupList[listIndex].records]
         let newData = newArray.filter((voice, vIndex) => voice.name.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -79,7 +75,7 @@ const ListScreen = ({ route, navigation }) => {
         }
     }, [searchClicked])
 
-    const openMenu = (index) => { console.log(index);setMenuVisible(true); setCurrentIndex(index) };
+    const openMenu = (index) => { console.log(index); setMenuVisible(true); setCurrentIndex(index) };
     const playerOpener = (index) => { setStarted(true); setCurrentIndex(index) };
 
     const handleChangeName = (value) => {
@@ -89,7 +85,7 @@ const ListScreen = ({ route, navigation }) => {
         newListRecords[listIndex].records[currentIndex].name = value;
         newSendedVoices[index].name = value;
         setModalVisible(false);
-        changeNameDispatcher(newListRecords);
+        updateListDispatcher(newListRecords);
         nameChanger(newSendedVoices)
     }
     const handleDelete = (index) => {
@@ -115,18 +111,13 @@ const ListScreen = ({ route, navigation }) => {
         let deleted = newData[listIndex].records
         let deletedIndex = tracks.findIndex(record => record.id == deleted[index].id);
         deleted.splice(index, 1)
-        changeNameDispatcher(newData);
+        updateListDispatcher(newData);
         setListRecords(deleted)
         if (deletedIndex !== -1) {
             var path = tracks[deletedIndex].url;
-            RNFS.unlink(path)
-                .then(() => {
-                    voiceDeleter(deletedIndex)
-                })
-                // `unlink` will throw an error, if the item to unlink does not exist
-                .catch((err) => {
-                    console.log(err.message);
-                });
+            ReactNativeBlobUtil.fs.unlink(path)
+                .then(() => { voiceDeleter(deletedIndex) })
+                .catch((err) => { console.log(err.message); })
         }
     }
     const changeNameOption = (index) => {
@@ -139,7 +130,7 @@ const ListScreen = ({ route, navigation }) => {
     const deleteFromList = (index) => {
         let newData = [...groupList];
         newData[listIndex].records.splice(index, 1)
-        changeNameDispatcher(newData);
+        updateListDispatcher(newData);
         setListRecords(newData[listIndex].records)
     }
 

@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "voiceRecorder";
+    return "Revo";
   }
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
